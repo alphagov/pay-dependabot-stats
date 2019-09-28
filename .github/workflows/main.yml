@@ -9,7 +9,6 @@ jobs:
     
     steps:
       - name: Clean install dependencies and build
-        uses: actions/checkout@v1
         run: |
           npm ci
           npm run build
