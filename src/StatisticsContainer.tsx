@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { GithubApiService } from './lib/GitHubApiService';
 import { PullRequest } from './types/PullRequest';
+import { RateLimitError } from './types/RateLimitError';
 
 type StatisticsProps = {
     githubApiService? : GithubApiService;
-    dependabotPulls? : PullRequest[];
+    dependabotPulls? : PullRequest[] | RateLimitError;
 }
 
 class StatisticsContainer extends Component<StatisticsProps> {
@@ -22,7 +23,6 @@ class StatisticsContainer extends Component<StatisticsProps> {
         this.setState({
             dependabotPulls: await this.githubApiService.getPullRequests()
         })
-        console.log(this.props.dependabotPulls);
     }
 
     render() {

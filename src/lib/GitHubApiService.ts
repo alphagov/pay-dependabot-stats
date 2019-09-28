@@ -1,6 +1,8 @@
 import { PullRequest } from "../types/PullRequest";
 import { Repos } from "../types/Repos";
 import { Repo } from "../types/Repo";
+import { eventNames } from "cluster";
+import { RateLimitError } from "../types/RateLimitError";
 
 export class GithubApiService {
     dependabotPulls : PullRequest[];
@@ -9,11 +11,15 @@ export class GithubApiService {
         this.dependabotPulls = [];
     }
 
-    public async getPullRequests() : Promise<PullRequest[]> {
+    public async getPullRequests() : Promise<PullRequest[] | RateLimitError> {
         const repos = await fetch('https://api.github.com/search/repositories?q=pay+org:alphagov')
-        const reposJson : Repos = await repos.json();
-        reposJson.items.forEach(x => this.processRepo(x));
-        return this.dependabotPulls;
+        const reposJson : Repos | RateLimitError = await repos.json();
+        if ((reposJson as Repos).items ) {
+            (reposJson as Repos).items.forEach(x => this.processRepo(x));
+            return this.dependabotPulls;
+        } else {
+            return (reposJson as RateLimitError)
+        }
     }
 
     private async processRepo(repo : Repo) : Promise<void> {
