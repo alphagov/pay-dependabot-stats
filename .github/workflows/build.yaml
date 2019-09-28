@@ -1,0 +1,5 @@
+- name: Clean install dependencies and build
+  run: |
+    npm ci
+    npm run build
+
