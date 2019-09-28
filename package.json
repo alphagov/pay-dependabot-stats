@@ -39,6 +39,9 @@
       "last 1 safari version"
     ]
   },
+  "lint-staged": {
+    "*": "prettier --write"
+  },
   "devDependencies": {
     "electron": "^6.0.10",
     "electron-builder": "^21.2.0",
