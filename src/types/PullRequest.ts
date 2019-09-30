@@ -1,5 +1,4 @@
 import { User } from "./User";
-import { Repo } from "./Repo";
 import { Links } from "./Links";
 import { Commit } from "./Commit";
 
