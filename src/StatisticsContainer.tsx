@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { GithubApiService } from "./lib/GitHubApiService";
 import { PullRequest } from "./types/PullRequest";
-import PRContainer from "./PRContainer"
+import PRContainer from "./PRContainer";
 
 type StatisticsProps = {
   githubApiService?: GithubApiService;
@@ -17,7 +17,6 @@ class StatisticsContainer extends Component<
   StatisticsProps,
   StatisticsPropsState
 > {
-
   githubApiService: GithubApiService;
   dependabotPulls: PullRequest[];
 
@@ -37,18 +36,16 @@ class StatisticsContainer extends Component<
     });
   }
 
-  renderPull(state : StatisticsPropsState) {
-    if(state.dependabotPulls[0]) {
-      return <PRContainer pullRequest={state.dependabotPulls[0]} />
+  renderPull(state: StatisticsPropsState) {
+    if (state.dependabotPulls[0]) {
+      return <PRContainer pullRequest={state.dependabotPulls[0]} />;
     }
   }
 
   render() {
     return (
       <div>
-        <h1>
-            {this.state.dependabotPulls.length}
-        </h1>
+        <h1>{this.state.dependabotPulls.length}</h1>
         {this.renderPull(this.state)}
       </div>
     );
