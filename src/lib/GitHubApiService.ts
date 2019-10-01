@@ -5,9 +5,6 @@ import apiKey from "../Secret";
 
 export class GithubApiService {
 
-    constructor() {
-    }
-
     public async getPullRequests() : Promise<PullRequest[]> {
         const returnedPulls : PullRequest[] = []
         const headers : Headers = new Headers({

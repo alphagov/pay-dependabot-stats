@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import { GithubApiService } from "./lib/GitHubApiService";
 import { PullRequest } from "./types/PullRequest";
-import { RateLimitError } from "./types/RateLimitError";
+import PRContainer from "./PRContainer"
 
 type StatisticsProps = {
   githubApiService?: GithubApiService;
-  dependabotPulls?: PullRequest[] | RateLimitError;
+  dependabotPulls?: PullRequest[];
 };
 
 type StatisticsPropsState = {
   githubApiService: GithubApiService;
-  dependabotPulls: PullRequest[] | RateLimitError;
+  dependabotPulls: PullRequest[];
 };
 
 class StatisticsContainer extends Component<
   StatisticsProps,
   StatisticsPropsState
 > {
+
   githubApiService: GithubApiService;
   dependabotPulls: PullRequest[];
 
@@ -36,18 +37,19 @@ class StatisticsContainer extends Component<
     });
   }
 
+  renderPull(state : StatisticsPropsState) {
+    if(state.dependabotPulls[0]) {
+      return <PRContainer pullRequest={state.dependabotPulls[0]} />
+    }
+  }
+
   render() {
     return (
       <div>
         <h1>
-          {() => {
-            if (this.state.dependabotPulls as PullRequest[]) {
-              return (this.state.dependabotPulls as PullRequest[]).length;
-            } else {
-              return (this.state.dependabotPulls as RateLimitError).message;
-            }
-          }}
+            {this.state.dependabotPulls.length}
         </h1>
+        {this.renderPull(this.state)}
       </div>
     );
   }
