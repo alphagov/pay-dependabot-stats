@@ -1,7 +1,7 @@
 import { PullRequest } from "../types/PullRequest";
 import { Repos } from "../types/Repos";
 import { Repo } from "../types/Repo";
-import { RateLimitError } from "../types/RateLimitError";
+import apiKey from "../Secret";
 
 export class GithubApiService {
 
@@ -10,7 +10,12 @@ export class GithubApiService {
 
     public async getPullRequests() : Promise<PullRequest[]> {
         const returnedPulls : PullRequest[] = []
-        const repos = await fetch('https://api.github.com/search/repositories?q=pay+org:alphagov')
+        const headers : Headers = new Headers({
+            'Authorization' : 'token ' + apiKey
+        })
+        const repos : Response = await fetch('https://api.github.com/search/repositories?q=pay+org:alphagov', {
+            headers: headers
+        })
         const reposJson : Repos = await repos.json();
         for(const repo of reposJson.items) {
             const pulls = await this.processRepo(repo)
