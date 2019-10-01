@@ -38,7 +38,13 @@ class StatisticsContainer extends Component<
 
   renderPull(state: StatisticsPropsState) {
     if (state.dependabotPulls[0]) {
-      return <PRContainer pullRequest={state.dependabotPulls[0]} />;
+      var oldestPr: PullRequest = state.dependabotPulls[0];
+      for (const pull of state.dependabotPulls) {
+        if (new Date(pull.created_at) < new Date(oldestPr.created_at)) {
+          oldestPr = pull;
+        }
+      }
+      return <PRContainer pullRequest={oldestPr} />;
     }
   }
 
