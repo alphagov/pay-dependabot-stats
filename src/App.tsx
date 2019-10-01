@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import StatisticsContainer from "./StatisticsContainer";
+import StatisticsContainer from "./Containers/StatisticsContainer";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <StatisticsContainer />
+      <StatisticsContainer/>
     </div>
   );
 };

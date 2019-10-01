@@ -1,8 +1,9 @@
 import { Component } from "react";
 import React from "react";
-import { PullRequest } from "./types/PullRequest";
-import { Status } from "./types/Status";
+import { PullRequest } from "../types/PullRequest";
+import { Status } from "../types/Status";
 import DateContainer from "./DateContainer";
+import "./PRContainer.css"
 
 type PRContainerProps = {
   pullRequest: PullRequest;
@@ -55,9 +56,8 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
   render() {
     return (
       <div>
-        <h2>
-          {this.props.pullRequest.title} {this.renderState(this.state)}
-          <DateContainer dateString={this.props.pullRequest.created_at} />
+        <h2 className="pr-widget">
+          {this.props.pullRequest.title} <DateContainer dateString={this.props.pullRequest.created_at} /> {this.renderState(this.state)}
         </h2>
       </div>
     );

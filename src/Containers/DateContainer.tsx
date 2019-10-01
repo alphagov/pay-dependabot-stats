@@ -50,7 +50,7 @@ class DateContainer extends Component<DateContainerProps, DateContainerState> {
   render() {
     return (
       <p>
-        Open since - {this.parseDayOfWeek(this.state.date.day())},{" "}
+        Open Since: {this.parseDayOfWeek(this.state.date.day())},{" "}
         {this.state.date.date()}/{this.state.date.month() + 1}/
         {this.state.date.year()}
       </p>

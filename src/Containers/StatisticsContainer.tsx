@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { GithubApiService } from "./lib/GitHubApiService";
-import { PullRequest } from "./types/PullRequest";
+import { GithubApiService } from "../lib/GitHubApiService";
+import { PullRequest } from "../types/PullRequest";
 import PRContainer from "./PRContainer";
+import "./StatisticsContainer.css"
 
 type StatisticsProps = {
   githubApiService?: GithubApiService;
@@ -51,8 +52,12 @@ class StatisticsContainer extends Component<
   render() {
     return (
       <div>
+      <div className="split left vertical-center">
         <h1>{this.state.dependabotPulls.length}</h1>
+      </div>
+      <div className="split right">
         {this.renderPull(this.state)}
+      </div>
       </div>
     );
   }
