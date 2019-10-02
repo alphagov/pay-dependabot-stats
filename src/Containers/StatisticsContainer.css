@@ -10,6 +10,18 @@
   flex-direction: column;
 }
 
+.horizontal-30 {
+  align-items: center;
+  width: 30%;
+  flex-direction: column;
+}
+
+.horizontal-70 {
+  align-items: center;
+  width: 70%;
+  flex-direction: column;
+}
+
 .alignment {
   display: flex;
   align-items: center;
@@ -28,11 +40,4 @@
 .pr-container {
   display: flex;
   align-items: flex-start;
-}
-
-.bottom-right {
-  text-align: right;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-end;
 }
