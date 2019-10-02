@@ -35,19 +35,18 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
     switch (status) {
       case "failure":
       case "error":
-        return "Failed";
+        return (
+          <span className="build-logo build-red"/>
+        )
       case "pending":
-        return "Pending";
+        return (
+          <span className="build-logo build-yellow"/>
+        )
       case "success":
-        return "Success";
+        return (
+          <span className="build-logo build-green"/>
+        )
     }
-  }
-
-  renderState(state: PRContainerState) {
-    if(this.props.pullRequest) {
-      
-    }
-    return <p>Build Status: {this.renderBuildState(state.status)}</p>;
   }
 
   renderRepo(html_url: string) {
@@ -75,9 +74,8 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
     return (
       <div>
         <h2 className="pr-widget">
-          {this.props.pullRequest.title}{" "}
+          {this.props.pullRequest.title} - {this.renderBuildState(this.state.status)}
           <DateContainer dateString={this.props.pullRequest.created_at} />{" "}
-          {this.renderState(this.state)}{" "}
           {this.renderRepo(this.props.pullRequest.html_url)}
         </h2>
       </div>

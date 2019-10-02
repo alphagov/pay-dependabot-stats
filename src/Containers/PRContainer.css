@@ -8,3 +8,27 @@
     text-align: left;
     max-width: 50vw;
 }
+
+.build-logo {
+    display: inline-block;
+    position: inherit;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    vertical-align:middle;
+}
+
+.build-green {
+    background-color: #00703c;
+}
+
+.build-yellow {
+    background-color: #ffdd00;
+}
+
+.build-red {
+    background-color: #d4351c;
+}
