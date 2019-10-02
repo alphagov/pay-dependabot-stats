@@ -51,11 +51,13 @@ class StatisticsContainer extends Component<
 
   render() {
     return (
-      <div>
-      <div className="split left vertical-center">
-        <h1>{this.state.dependabotPulls.length}</h1>
+      <div className="parent">
+      <div className="horizontal-centered">
+        <div className="alignment">
+          <h1 className="vertical-centered pr-number-text">{this.state.dependabotPulls.length}</h1>          
+        </div>
       </div>
-      <div className="split right">
+      <div className="horizontal-centered">
         {this.renderPull(this.state)}
       </div>
       </div>
