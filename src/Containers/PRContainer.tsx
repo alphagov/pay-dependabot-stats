@@ -44,6 +44,14 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
     return <p>Build Status: {this.renderBuildState(state.status)}</p>;
   }
 
+  renderRepo(html_url: string) {
+    return (
+      <p>
+        Repository: {html_url.substring(html_url.indexOf('alphagov'),html_url.indexOf('/pull'))}
+      </p>
+    )
+  }
+
   renderDate(dateString: string) {
     const date: Date = new Date(dateString);
     return (
@@ -57,7 +65,7 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
     return (
       <div>
         <h2 className="pr-widget">
-          {this.props.pullRequest.title} <DateContainer dateString={this.props.pullRequest.created_at} /> {this.renderState(this.state)} {this.props.pullRequest.html_url}
+          {this.props.pullRequest.title} <DateContainer dateString={this.props.pullRequest.created_at} /> {this.renderState(this.state)} {this.renderRepo(this.props.pullRequest.html_url)}
         </h2>
       </div>
     );

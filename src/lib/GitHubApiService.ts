@@ -1,6 +1,7 @@
 import { PullRequest } from "../types/PullRequest";
 import { Repos } from "../types/Repos";
 import { Repo } from "../types/Repo";
+import { ReposWithPullRequests } from "../types/ReposWithPullRequests";
 import apiKey from "../Secret";
 
 export class GithubApiService {
@@ -37,5 +38,28 @@ export class GithubApiService {
 
     private processPullRequest(pullRequest : PullRequest) : boolean {
         return pullRequest.user.login.includes('dependabot')
+    }
+
+    async getPrsByRepo() : Promise<ReposWithPullRequests[]> {
+        const returnedPulls : ReposWithPullRequests[] = []
+        const headers : Headers = new Headers({
+            'Authorization' : 'token ' + apiKey
+        })
+        const repos : Response = await fetch('https://api.github.com/search/repositories?q=pay+org:alphagov', {
+            headers: headers
+        })
+        const reposJson : Repos = await repos.json();
+        for(const repo of reposJson.items) {
+            const pulls = await this.processRepo(repo)
+            const repoWithPull : ReposWithPullRequests = {
+                repo : repo,
+                pullRequests : []
+            }
+            for(const pull of pulls) {
+                repoWithPull.pullRequests.push(pull);
+            }
+            returnedPulls.push(repoWithPull)
+        }
+        return returnedPulls;
     }
 }

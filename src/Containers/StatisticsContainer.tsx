@@ -3,15 +3,18 @@ import { GithubApiService } from "../lib/GitHubApiService";
 import { PullRequest } from "../types/PullRequest";
 import PRContainer from "./PRContainer";
 import "./StatisticsContainer.css"
+import { ReposWithPullRequests } from "../types/ReposWithPullRequests";
 
 type StatisticsProps = {
   githubApiService?: GithubApiService;
   dependabotPulls?: PullRequest[];
+  dependabotReposWithPullRequests? : ReposWithPullRequests[]
 };
 
 type StatisticsPropsState = {
   githubApiService: GithubApiService;
-  dependabotPulls: PullRequest[];
+  dependabotReposWithPullRequests: ReposWithPullRequests[];
+  dependabotPullRequests: PullRequest[];
 };
 
 class StatisticsContainer extends Component<
@@ -19,27 +22,36 @@ class StatisticsContainer extends Component<
   StatisticsPropsState
 > {
   githubApiService: GithubApiService;
-  dependabotPulls: PullRequest[];
+  dependabotPullRequests: PullRequest[];
+  dependabotReposWithPullRequests: ReposWithPullRequests[];
 
   constructor(props: StatisticsProps) {
     super(props);
     this.githubApiService = new GithubApiService();
-    this.dependabotPulls = [];
+    this.dependabotPullRequests = [];
+    this.dependabotReposWithPullRequests = [];
     this.state = {
-      dependabotPulls: this.dependabotPulls,
+      dependabotReposWithPullRequests: this.dependabotReposWithPullRequests,
+      dependabotPullRequests: this.dependabotPullRequests,
       githubApiService: this.githubApiService
     };
   }
 
+  collapsePullRequests(dependabotReposWithPullRequests: ReposWithPullRequests[]) : PullRequest[] {
+    return dependabotReposWithPullRequests.flatMap(x => x.pullRequests);
+  }
+
   async componentDidMount() {
+    const prsByRepo = await this.githubApiService.getPrsByRepo()
     this.setState({
-      dependabotPulls: await this.githubApiService.getPullRequests()
+      dependabotReposWithPullRequests: prsByRepo,
+      dependabotPullRequests: this.collapsePullRequests(prsByRepo)
     });
   }
 
   renderPull(state: StatisticsPropsState) {
-    if (state.dependabotPulls[0]) {
-    const securityPulls : PullRequest[] = state.dependabotPulls
+    if (state.dependabotPullRequests[0]) {
+    const securityPulls : PullRequest[] = state.dependabotPullRequests
     .filter(x => this.containsSecurityLabel(x))
     .sort(function (a, b) { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime() })
     .slice(0,3)
@@ -67,7 +79,7 @@ class StatisticsContainer extends Component<
       <div className="parent">
       <div className="horizontal-centered">
         <div className="alignment">
-          <h1 className="vertical-centered pr-number-text">{this.state.dependabotPulls.length}</h1>          
+          <h1 className="vertical-centered pr-number-text">{this.state.dependabotPullRequests.length}</h1>          
         </div>
       </div>
       <div className="horizontal-centered">
