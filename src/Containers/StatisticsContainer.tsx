@@ -4,6 +4,7 @@ import { PullRequest } from "../types/PullRequest";
 import PRContainer from "./PRContainer";
 import "./StatisticsContainer.css"
 import { ReposWithPullRequests } from "../types/ReposWithPullRequests";
+import RepoStatsContainer from "./RepoStatsContainer";
 
 type StatisticsProps = {
   githubApiService?: GithubApiService;
@@ -65,6 +66,14 @@ class StatisticsContainer extends Component<
     }
   }
 
+  renderRepos(state: StatisticsPropsState) {
+    if (state.dependabotPullRequests[0]) {
+      return (
+        <RepoStatsContainer repos={this.state.dependabotReposWithPullRequests}/>
+      )
+    }
+  }
+
   containsSecurityLabel(pull : PullRequest) : boolean{
     for(const label of pull.labels) {
       if(label.name === "security") {
@@ -84,6 +93,7 @@ class StatisticsContainer extends Component<
       </div>
       <div className="horizontal-centered">
         {this.renderPull(this.state)}
+        {this.renderRepos(this.state)}
       </div>
       </div>
     );

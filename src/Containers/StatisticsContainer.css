@@ -24,3 +24,15 @@
   text-align: left;
   font-size: 25vh;
 }
+
+.vertical-bottom-horizontal-right {
+  order: 1;
+  flex: 0 1 auto;
+  align-self: flex-end;
+}
+
+.bottom-right {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+}
