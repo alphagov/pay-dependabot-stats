@@ -1,6 +1,7 @@
 import { User } from "./User";
 import { Links } from "./Links";
 import { Commit } from "./Commit";
+import { Label } from "./Label";
 
 export interface PullRequest {
         url: string,
@@ -25,7 +26,7 @@ export interface PullRequest {
         assignees: User[],
         requested_reviewers: User[],
         requested_teams: any,
-        labels: any,
+        labels: Label[],
         milestone: string,
         commits_url: string,
         review_comments_url: string,

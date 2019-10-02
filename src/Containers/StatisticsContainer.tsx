@@ -39,14 +39,27 @@ class StatisticsContainer extends Component<
 
   renderPull(state: StatisticsPropsState) {
     if (state.dependabotPulls[0]) {
-      var oldestPr: PullRequest = state.dependabotPulls[0];
-      for (const pull of state.dependabotPulls) {
-        if (new Date(pull.created_at) < new Date(oldestPr.created_at)) {
-          oldestPr = pull;
-        }
-      }
-      return <PRContainer pullRequest={oldestPr} />;
+    const securityPulls : PullRequest[] = state.dependabotPulls
+    .filter(x => this.containsSecurityLabel(x))
+    .sort(function (a, b) { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime() })
+    .slice(0,3)
+      return (
+        <div>
+          {securityPulls.map(x => {
+            return <PRContainer pullRequest={x}/>
+          })}
+        </div>
+      );
     }
+  }
+
+  containsSecurityLabel(pull : PullRequest) : boolean{
+    for(const label of pull.labels) {
+      if(label.name === "security") {
+        return true;
+      }
+    }
+    return false;
   }
 
   render() {

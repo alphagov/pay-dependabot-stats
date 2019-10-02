@@ -57,7 +57,7 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
     return (
       <div>
         <h2 className="pr-widget">
-          {this.props.pullRequest.title} <DateContainer dateString={this.props.pullRequest.created_at} /> {this.renderState(this.state)}
+          {this.props.pullRequest.title} <DateContainer dateString={this.props.pullRequest.created_at} /> {this.renderState(this.state)} {this.props.pullRequest.html_url}
         </h2>
       </div>
     );
