@@ -57,7 +57,7 @@ class StatisticsContainer extends Component<
     .sort(function (a, b) { return new Date(a.created_at).getTime() - new Date(b.created_at).getTime() })
     .slice(0,3)
       return (
-        <div>
+        <div className="">
           {securityPulls.map(x => {
             return <PRContainer pullRequest={x}/>
           })}
