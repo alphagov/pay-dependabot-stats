@@ -53,10 +53,11 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
     return (
       <p>
         Repository:{" "}
-        {html_url.substring(
+        <a href={html_url}>{html_url.substring(
           html_url.indexOf("alphagov"),
           html_url.indexOf("/pull")
         )}
+        </a>
       </p>
     );
   }

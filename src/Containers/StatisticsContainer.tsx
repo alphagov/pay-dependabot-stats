@@ -54,12 +54,13 @@ class StatisticsContainer extends Component<
       dependabotReposWithPullRequests: prsByRepo,
       dependabotPullRequests: this.collapsePullRequests(prsByRepo)
     });
-    this.interval = setInterval(() => {
+    this.interval = setInterval(async () => {
+      const prsByRepo = await this.githubApiService.getPrsByRepo();
       this.setState({
         dependabotReposWithPullRequests: prsByRepo,
         dependabotPullRequests: this.collapsePullRequests(prsByRepo)
       });
-    }, 1800000);
+    }, 600000);
   }
 
   componentWillUnmount() {
@@ -89,9 +90,11 @@ class StatisticsContainer extends Component<
   renderRepos(state: StatisticsPropsState) {
     if (state.dependabotPullRequests[0]) {
       return (
-        <RepoStatsContainer
+        <div className="title-text">
+        <RepoStatsContainer 
           repos={this.state.dependabotReposWithPullRequests}
         />
+        </div>
       );
     }
   }
@@ -116,7 +119,9 @@ class StatisticsContainer extends Component<
           </div>
         </div>
         <div className="horizontal-70">
+        <h1 className="title-text">Security Pulls</h1>
           {this.renderPull(this.state)}
+          <h1 className="title-text">Repo Stats</h1>
           {this.renderRepos(this.state)}
         </div>
       </div>

@@ -10,7 +10,7 @@ interface RepoStatsState {
 }
 
 class RepoStatsContainer extends Component<RepoStatsProps, RepoStatsState> {
-  numberDisplayed: number = 5;
+  numberDisplayed: number = 10;
 
   constructor(props: RepoStatsProps) {
     super(props);
