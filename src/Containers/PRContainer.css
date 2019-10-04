@@ -10,14 +10,14 @@
 
 .build-logo {
     display: inline-block;
-    position: inherit;
-    top: 0;
+    vertical-align: middle;
+    top: 50%;
+    transform: translateY(-15%);
     left: 0;
-    width: 30px;
-    height: 30px;
+    width: 12px;
+    height: 12px;
     border: 1px solid transparent;
     border-radius: 50%;
-    vertical-align:middle;
 }
 
 .build-green {
