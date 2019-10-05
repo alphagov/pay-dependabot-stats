@@ -91,7 +91,7 @@ class StatisticsContainer extends Component<
     if (state.dependabotPullRequests[0]) {
       return (
         <div className="title-text">
-        <RepoStatsContainer 
+        <RepoStatsContainer
           repos={this.state.dependabotReposWithPullRequests}
         />
         </div>
@@ -111,18 +111,23 @@ class StatisticsContainer extends Component<
   render() {
     return (
       <div className="parent">
-        <div className="horizontal-30">
+        <div className="horizontal-centered pr-container">
           <div className="alignment">
             <h1 className="vertical-centered pr-number-text">
               {this.state.dependabotPullRequests.length}
             </h1>
           </div>
         </div>
-        <div className="horizontal-70">
-        <h1 className="title-text">Security Pulls</h1>
-          {this.renderPull(this.state)}
-          <h1 className="title-text">Repo Stats</h1>
-          {this.renderRepos(this.state)}
+        <div className="horizontal-centered details-container">
+          <div className="govuk-body">
+            <h2 className="govuk-heading-m">Vulnerabilities</h2>
+            {this.renderPull(this.state)}
+          </div>
+
+          <div className="govuk-body">
+            <h2 className="govuk-heading-m">Repositories</h2>
+            {this.renderRepos(this.state)}
+          </div>
         </div>
       </div>
     );
