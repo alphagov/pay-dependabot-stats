@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'GDS Transport';
-  src: local('GDS Transport'), url(./fonts/bold-affa96571d-v2.woff) format('woff');
+  src: local('GDS Transport'), url(./../node_modules/govuk-frontend/govuk/assets/fonts/bold-affa96571d-v2.woff) format('woff');
 }
 
 .App {
