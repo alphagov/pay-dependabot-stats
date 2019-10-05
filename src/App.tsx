@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import StatisticsContainer from "./Containers/StatisticsContainer";
 
 const App: React.FC = () => {

@@ -1,7 +1,12 @@
-@font-face {
-  font-family: 'GDS Transport';
-  src: local('GDS Transport'), url(./../node_modules/govuk-frontend/govuk/assets/fonts/bold-affa96571d-v2.woff) format('woff');
+// govuk/tools/_font-url.scss allows us to override the target for fonts
+// target local assets (vs. a remote fetch in the browser) allowing us bundle everything
+@function bundle-fonts-local-target($filename) {
+  @return url("~govuk-frontend/govuk/assets/fonts/" + $filename);
 }
+$govuk-font-url-function: bundle-fonts-local-target;
+
+// extend the govuk design system
+@import '~govuk-frontend/govuk/all.scss';
 
 .App {
   text-align: center;
