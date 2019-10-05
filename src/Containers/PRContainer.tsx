@@ -87,10 +87,6 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
         <div>
           <DateContainer dateString={this.props.pullRequest.created_at} />
         </div>
-          {/* {this.renderBuildState(this.state.status)} */}
-        <div>
-
-        </div>
       </div>
     );
   }

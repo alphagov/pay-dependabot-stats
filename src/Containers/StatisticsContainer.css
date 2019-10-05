@@ -1,7 +1,5 @@
 .parent {
   display: flex;
-  justify-content: space-between;
-  min-height: 100vh;
 }
 
 .horizontal-centered {
@@ -39,8 +37,6 @@
 }
 
 .pr-container {
-  /* display: flex;
-  align-items: flex-start; */
   background-color: #1d70b8;
   color: white;
   border-right: 2px solid #003078;
@@ -48,7 +44,7 @@
 
 .details-container {
   background-color: #f3f2f1;
-  padding: 15px;
+  padding: 20px;
 }
 
 .title-text {

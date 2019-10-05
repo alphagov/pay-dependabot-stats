@@ -37,3 +37,13 @@
     width: 100%;
     text-align: right;
 }
+
+.repo-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.repo-item:last-child {
+    flex-grow: 1;
+    text-align: right;
+}
