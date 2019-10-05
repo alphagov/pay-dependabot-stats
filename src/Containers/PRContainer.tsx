@@ -51,14 +51,11 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
 
   renderRepo(html_url: string) {
     return (
-      <p>
-        Repository:{" "}
-        <a href={html_url}>{html_url.substring(
+        <a className="govuk-link--no-visited-state" href={html_url}>{html_url.substring(
           html_url.indexOf("alphagov"),
           html_url.indexOf("/pull")
         )}
         </a>
-      </p>
     );
   }
 
@@ -72,13 +69,28 @@ class PRContainer extends Component<PRContainerProps, PRContainerState> {
   }
 
   render() {
+    const statusMap = new Map([
+      [ "failure", "build-red" ],
+      [ "error", "build-red" ],
+      [ "pending", "build-yellow" ],
+      [ "success", "build-green" ]
+    ])
+
     return (
-      <div>
-        <h2 className="pr-widget">
-          {this.props.pullRequest.title} {this.renderBuildState(this.state.status)}
-          <DateContainer dateString={this.props.pullRequest.created_at} />{" "}
+      <div className={ `pr-widget ${statusMap.get(this.state.status)}` }>
+        <div className="text-right">
           {this.renderRepo(this.props.pullRequest.html_url)}
-        </h2>
+        </div>
+        <div>
+          <span className="govuk-!-font-size-27">{this.props.pullRequest.title}</span>
+        </div>
+        <div>
+          <DateContainer dateString={this.props.pullRequest.created_at} />
+        </div>
+          {/* {this.renderBuildState(this.state.status)} */}
+        <div>
+
+        </div>
       </div>
     );
   }

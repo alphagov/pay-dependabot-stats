@@ -1,11 +1,12 @@
 .pr-widget {
-    border-color: #b1b4b6;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 5px;
-    background-color: #f3f2f1;
-    color: 	#0b0c0c;
-    max-width: 60vw;
+    border: 1px solid#b1b4b6;
+    border-radius: 2px;
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    border-left: 10px solid #b1b4b6;
 }
 
 .build-logo {
@@ -21,13 +22,18 @@
 }
 
 .build-green {
-    background-color: #00703c;
+    border-color: #00703c;
 }
 
 .build-yellow {
-    background-color: #ffdd00;
+    border-color: #ffdd00;
 }
 
 .build-red {
-    background-color: #d4351c;
+    border-color: #d4351c;
+}
+
+.text-right {
+    width: 100%;
+    text-align: right;
 }
