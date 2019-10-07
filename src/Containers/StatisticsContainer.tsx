@@ -90,8 +90,8 @@ class StatisticsContainer extends Component<
   renderRepos(state: StatisticsPropsState) {
     if (state.dependabotPullRequests[0]) {
       return (
-        <div className="title-text">
-        <RepoStatsContainer 
+        <div>
+        <RepoStatsContainer
           repos={this.state.dependabotReposWithPullRequests}
         />
         </div>
@@ -100,29 +100,31 @@ class StatisticsContainer extends Component<
   }
 
   containsSecurityLabel(pull: PullRequest): boolean {
-    for (const label of pull.labels) {
-      if (label.name === "security") {
-        return true;
-      }
-    }
-    return false;
+    return pull.labels
+      .map(label => label.name)
+      .includes("security")
   }
 
   render() {
     return (
       <div className="parent">
-        <div className="horizontal-30">
+        <div className="horizontal-centered pr-container">
           <div className="alignment">
             <h1 className="vertical-centered pr-number-text">
               {this.state.dependabotPullRequests.length}
             </h1>
           </div>
         </div>
-        <div className="horizontal-70">
-        <h1 className="title-text">Security Pulls</h1>
-          {this.renderPull(this.state)}
-          <h1 className="title-text">Repo Stats</h1>
-          {this.renderRepos(this.state)}
+        <div className="horizontal-centered details-container">
+          <div className="govuk-body govuk-!-margin-bottom-7">
+            <h1 className="govuk-heading-l">Vulnerabilities</h1>
+            {this.renderPull(this.state)}
+          </div>
+
+          <div className="govuk-body">
+            <h1 className="govuk-heading-l">Repositories</h1>
+            {this.renderRepos(this.state)}
+          </div>
         </div>
       </div>
     );

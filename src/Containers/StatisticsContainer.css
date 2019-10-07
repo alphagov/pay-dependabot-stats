@@ -1,7 +1,5 @@
 .parent {
   display: flex;
-  justify-content: space-between;
-  min-height: 100vh;
 }
 
 .horizontal-centered {
@@ -25,6 +23,7 @@
 .alignment {
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
 }
 
@@ -34,12 +33,18 @@
 
 .pr-number-text {
   text-align: left;
-  font-size: 25vh;
+  font-size: 35vh;
 }
 
 .pr-container {
-  display: flex;
-  align-items: flex-start;
+  background-color: #1d70b8;
+  color: white;
+  border-right: 2px solid #003078;
+}
+
+.details-container {
+  background-color: #f3f2f1;
+  padding: 20px;
 }
 
 .title-text {

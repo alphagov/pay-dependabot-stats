@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { ReposWithPullRequests } from "../types/ReposWithPullRequests";
+import { PullRequest } from "../types/PullRequest";
+import moment from "moment";
 
 interface RepoStatsProps {
   repos: ReposWithPullRequests[];
@@ -10,7 +12,7 @@ interface RepoStatsState {
 }
 
 class RepoStatsContainer extends Component<RepoStatsProps, RepoStatsState> {
-  numberDisplayed: number = 4;
+  numberDisplayed: number = 6;
 
   constructor(props: RepoStatsProps) {
     super(props);
@@ -25,32 +27,50 @@ class RepoStatsContainer extends Component<RepoStatsProps, RepoStatsState> {
     });
   }
 
-  renderRepo(repo: ReposWithPullRequests): string {
-    if (repo.pullRequests.length > 0) {
-      return repo.repo.name + ": " + repo.pullRequests.length;
-    } else {
-      return "";
-    }
+  oldestPullRequest(pullRequests: PullRequest[]): PullRequest {
+    const latest = pullRequests
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+      .pop()
+
+    return latest!
   }
 
   renderRepos(repos: ReposWithPullRequests[]) {
     return (
-      <h2>
+      <div>
         {repos
+          .filter(x => x.pullRequests.length > 0)
           .map((x, index) => {
+            const oldest = this.oldestPullRequest(x.pullRequests)
+
             return (
-              this.renderRepo(x) +
-              (index === this.numberDisplayed - 1 ? "" : ", ")
+              <div>
+                <div className="repo-row">
+                  <div className="repo-item">
+                     <h2 className="govuk-heading-m govuk-!-margin-bottom-1">{ x.repo.full_name }</h2>
+                  </div>
+                  <div className="repo-item">
+                     <h2 className="govuk-heading-m govuk-!-margin-bottom-1">{ x.pullRequests.length } remaining</h2>
+                  </div>
+                </div>
+                <div>
+                  <a className="govuk-link--no-visited-state" href={ oldest.html_url }>
+                    Oldest pull request openened { moment(oldest.created_at).fromNow() }
+                  </a>
+                </div>
+
+                <hr className="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
+              </div>
             );
           })
           .slice(0, this.numberDisplayed)}
-      </h2>
+      </div>
     );
   }
 
   render() {
     return (
-      <div className="bottom-right">
+      <div>
         {this.renderRepos(this.state.reposSortedByCount)}
       </div>
     );
