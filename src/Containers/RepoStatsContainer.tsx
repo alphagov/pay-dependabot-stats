@@ -29,8 +29,7 @@ class RepoStatsContainer extends Component<RepoStatsProps, RepoStatsState> {
 
   oldestPullRequest(pullRequests: PullRequest[]): PullRequest {
     const latest = pullRequests
-      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-      .pop()
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[pullRequests.length-1]
 
     return latest!
   }
