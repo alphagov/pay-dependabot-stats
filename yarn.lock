@@ -5005,6 +5005,11 @@ got@^9.6.0:
     to-readable-stream "^1.0.0"
     url-parse-lax "^3.0.0"
 
+govuk-frontend@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-3.2.0.tgz#0f935bee092929455bf7ed08bba40ab07ea72769"
+  integrity sha512-OtJozAGMEKFu195fNVVrQHUX7+znCkA4cXDKs4lgFlRQOTzN1ogT9010GBARuoTwbeL0VqQ8nerZYjVxH/wafA==
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.2.tgz#6f0952605d0140c1cfdb138ed005775b92d67b02"
