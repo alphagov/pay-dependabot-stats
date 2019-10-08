@@ -54,7 +54,7 @@ class RepoStatsContainer extends Component<RepoStatsProps, RepoStatsState> {
                 </div>
                 <div>
                   <a className="govuk-link--no-visited-state" href={ oldest.html_url }>
-                    Oldest pull request openened { moment(oldest.created_at).fromNow() }
+                    Oldest pull request opened { moment(oldest.created_at).fromNow() }
                   </a>
                 </div>
 
