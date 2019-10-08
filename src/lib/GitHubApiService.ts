@@ -2,13 +2,13 @@ import { PullRequest } from "../types/PullRequest";
 import { Repos } from "../types/Repos";
 import { Repo } from "../types/Repo";
 import { ReposWithPullRequests } from "../types/ReposWithPullRequests";
-import apiKey from "../Secret";
+const { DP_GITHUB_APIKEY } = process.env;
 
 export class GithubApiService {
   public async getPullRequests(): Promise<PullRequest[]> {
     const returnedPulls: PullRequest[] = [];
     const headers: Headers = new Headers({
-      Authorization: "token " + apiKey
+      Authorization: "token " + DP_GITHUB_APIKEY
     });
     const repos: Response = await fetch(
       "https://api.github.com/search/repositories?q=pay+org:alphagov",
@@ -47,7 +47,7 @@ export class GithubApiService {
   async getPrsByRepo(): Promise<ReposWithPullRequests[]> {
     const returnedPulls: ReposWithPullRequests[] = [];
     const headers: Headers = new Headers({
-      Authorization: "token " + apiKey
+      Authorization: "token " + DP_GITHUB_APIKEY
     });
     const repos: Response = await fetch(
       "https://api.github.com/search/repositories?q=pay+org:alphagov",
