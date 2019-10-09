@@ -16,7 +16,6 @@ type StatisticsPropsState = {
   githubApiService: GithubApiService;
   dependabotReposWithPullRequests: ReposWithPullRequests[];
   dependabotPullRequests: PullRequest[];
-  timeTilUpdate: number;
 };
 
 class StatisticsContainer extends Component<
@@ -38,7 +37,6 @@ class StatisticsContainer extends Component<
       dependabotReposWithPullRequests: this.dependabotReposWithPullRequests,
       dependabotPullRequests: this.dependabotPullRequests,
       githubApiService: this.githubApiService,
-      timeTilUpdate: 0
     };
   }
 
@@ -58,7 +56,7 @@ class StatisticsContainer extends Component<
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.timeTilUpdate);
+    clearInterval(this.interval);
   }
 
   async scopesRestricted() : Promise<void> {
@@ -73,7 +71,7 @@ class StatisticsContainer extends Component<
         dependabotReposWithPullRequests: prsByRepo,
         dependabotPullRequests: this.collapsePullRequests(prsByRepo)
       });
-    }, 600000);  
+    }, 600000);
   }
 
   printScopeError() : void {
