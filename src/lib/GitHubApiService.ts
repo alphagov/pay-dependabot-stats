@@ -56,6 +56,7 @@ export class GithubApiService {
       }
     );
     const reposJson: Repos = await repos.json();
+    const responseHeaders : Headers = await repos.headers;
     for (const repo of reposJson.items) {
       const pulls = await this.processRepo(repo);
       const repoWithPull: ReposWithPullRequests = {
@@ -68,5 +69,28 @@ export class GithubApiService {
       returnedPulls.push(repoWithPull);
     }
     return returnedPulls;
+  }
+
+  async checkScopes(): Promise<Headers> {
+    const scopesCheckUrl : string = "https://api.github.com/users/codertocat"
+    const headers: Headers = new Headers({
+      Authorization: "token " + DP_GITHUB_APIKEY
+    });
+    const scope: Response = await fetch(
+      scopesCheckUrl,
+      {
+        headers: headers
+      }
+    );
+    return scope.headers;
+  }
+
+  headersHaveRepoScope(headers: Headers) : boolean {
+    const OAuthHeaders : string | null = headers.get("X-OAuth-Scopes");
+    if((OAuthHeaders as string)) {
+      return (OAuthHeaders as string).includes("repo");
+    } else {
+      return false;
+    }
   }
 }

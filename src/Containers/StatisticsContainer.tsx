@@ -16,7 +16,6 @@ type StatisticsPropsState = {
   githubApiService: GithubApiService;
   dependabotReposWithPullRequests: ReposWithPullRequests[];
   dependabotPullRequests: PullRequest[];
-  timeTilUpdate: number;
 };
 
 class StatisticsContainer extends Component<
@@ -38,7 +37,6 @@ class StatisticsContainer extends Component<
       dependabotReposWithPullRequests: this.dependabotReposWithPullRequests,
       dependabotPullRequests: this.dependabotPullRequests,
       githubApiService: this.githubApiService,
-      timeTilUpdate: 0
     };
   }
 
@@ -49,6 +47,19 @@ class StatisticsContainer extends Component<
   }
 
   async componentDidMount() {
+    const scopes : Headers = await this.githubApiService.checkScopes();
+    if(!this.githubApiService.headersHaveRepoScope(scopes)) {
+      await this.scopesRestricted();
+    } else {
+      this.printScopeError();
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  async scopesRestricted() : Promise<void> {
     const prsByRepo = await this.githubApiService.getPrsByRepo();
     this.setState({
       dependabotReposWithPullRequests: prsByRepo,
@@ -63,8 +74,9 @@ class StatisticsContainer extends Component<
     }, 600000);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.state.timeTilUpdate);
+  printScopeError() : void {
+    console.log("You are running this application using a token with elevated scope that allows " +
+    "access to private repos, please use another token")
   }
 
   renderPull(state: StatisticsPropsState) {
