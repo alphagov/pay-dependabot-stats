@@ -54,7 +54,7 @@
     "*": "prettier --write"
   },
   "devDependencies": {
-    "electron": "^6.0.10",
+    "electron": "^9.4.0",
     "electron-builder": "^21.2.0",
     "prettier": "^1.18.2",
     "wait-on": "^3.3.0"
