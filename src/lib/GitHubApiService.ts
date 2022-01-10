@@ -56,7 +56,6 @@ export class GithubApiService {
       }
     );
     const reposJson: Repos = await repos.json();
-    const responseHeaders : Headers = await repos.headers;
     for (const repo of reposJson.items) {
       const pulls = await this.processRepo(repo);
       const repoWithPull: ReposWithPullRequests = {
