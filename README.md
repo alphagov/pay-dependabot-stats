@@ -1,5 +1,9 @@
 # pay-dependabot-stats
+
+> As of April 2023 this repository is no longer actively maintained by the GOV.UK Pay Team.
+
 A dashboard that shows stats regarding the current dependabot PRs for GOV.UK Pay
+
 ## How to run
 Create a github OAuth key, and place it before `yarn run start` like:
 
